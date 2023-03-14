@@ -19,5 +19,6 @@ from shopping.views import ShoppingApiView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/shoppinglist', ShoppingApiView.as_view())
+    path('api/v1/shoppinglist', ShoppingApiView.as_view()),
+    path('api/v1/shoppinglist/<int:pk>/', ShoppingApiView.as_view()),
 ]

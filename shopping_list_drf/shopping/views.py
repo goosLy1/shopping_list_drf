@@ -9,16 +9,16 @@ from rest_framework.response import Response
 
 class ShoppingApiView(APIView):
     def get(self, request):
-        lst = Shopping.objects.all().values()
-
-        return Response({'shopping_lists': list(lst)})
+        lst = Shopping.objects.all()
+        print(ShoppingSerializer(lst, many = True).data)
+        print(request.user)
+        return Response({'shopping_lists': ShoppingSerializer(lst, many = True).data})
     
     def post(self, request):
-        new_list = Shopping.objects.create(
-            label = request.data['label'],
-            user_id = request.data['user_id']
-        )
-        return Response({'shopping_list': model_to_dict(new_list)})
+        serializer = ShoppingSerializer(data = request.data, context = {'user_id': request.user.id})
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response({'shopping_list': serializer.data})
 
 
 # class ShoppingApiView(generics.ListAPIView):
