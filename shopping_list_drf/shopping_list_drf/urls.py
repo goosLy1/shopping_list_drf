@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from shopping.views import ShoppingApiView
+from shopping.views import ShoppingAPIList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/shoppinglist', ShoppingApiView.as_view()),
-    path('api/v1/shoppinglist/<int:pk>/', ShoppingApiView.as_view()),
+    path('api/v1/shoppinglist', ShoppingAPIList.as_view()),
+    path('api/v1/shoppinglist/<int:pk>/', ShoppingAPIList.as_view()),
 ]
